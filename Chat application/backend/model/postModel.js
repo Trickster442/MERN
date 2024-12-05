@@ -12,6 +12,7 @@ const postSchema = new mongoose.Schema({
     },
     like:[{type: mongoose.Types.ObjectId,
         ref: 'User'}], 
+        
     comment:[{type: mongoose.Types.ObjectId,
         ref: 'Comment'
     }]

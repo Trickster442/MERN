@@ -1,0 +1,11 @@
+.addPost-container{
+    max-height: 50vh;
+    min-height: 20vh;
+    width: 400px;
+    margin: auto;
+    z-index: 1000;
+}
+
+.addPost-container form button{
+    width: 49%;
+}

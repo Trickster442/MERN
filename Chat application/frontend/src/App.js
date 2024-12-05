@@ -5,7 +5,6 @@ import Registerr from './pages/Registerr';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import ProtectedRoute from './pages/ProtectedRoute';
-
 function App() {
   return (
     <BrowserRouter>

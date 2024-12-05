@@ -22,7 +22,7 @@ const commentSchema = new mongoose.Schema({
     },
 });
 
-// Create the Comment model
+// Create the Comment model    
 const commentModel = mongoose.model('Comment', commentSchema);
 
 export default commentModel;
