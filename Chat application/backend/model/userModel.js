@@ -45,7 +45,6 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User'  // Same here, 'User' should match the model name
     }],
-
     post: [{
         type:mongoose.Types.ObjectId,
         ref:'Post'

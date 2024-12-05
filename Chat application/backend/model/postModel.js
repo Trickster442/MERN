@@ -10,6 +10,11 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true, 
     },
+    like:[{type: mongoose.Types.ObjectId,
+        ref: 'User'}], 
+    comment:[{type: mongoose.Types.ObjectId,
+        ref: 'Comment'
+    }]
 }, {
     timestamps: { // Corrected custom timestamp names
         createdAt: 'created_at',

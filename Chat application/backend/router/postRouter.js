@@ -7,4 +7,8 @@ const postController = new PostController();
 postRouter.post('/newPost', postController.addNewPost);
 
 
+
+//routes to handle comment in post
+postRouter.post('/addComment', postController.addNewComment);
+
 export default postRouter;
