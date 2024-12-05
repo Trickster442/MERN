@@ -1,0 +1,102 @@
+.header-container{
+    background-color: #ccc;
+    padding-top: 2px;
+    padding-left: 12%;
+    display: flex;
+    gap: 2rem;
+}
+
+.secondary-container{
+    display: flex;
+    gap: 10rem;
+
+}
+.logo-part-container{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+}
+
+.logo{
+    margin-bottom: 1rem;
+    font-size: x-large;
+}
+
+/* Search Input Wrapper */
+.search-input-container {
+    position: relative;
+    display: inline-block;
+    width: 80%;
+  }
+  
+  .search-input-container input {
+    width: 100%;
+    padding: 8px 10px 8px 40px; /* Add left padding for the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    background-color: #6f99d4;
+  }
+  
+  .search-input-container .search-icon {
+    position: absolute;
+    top: 40%;
+    left: 10px; /* Position the icon inside the input */
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #888; /* Icon color */
+    pointer-events: none; /* Prevent the icon from blocking clicks in the input */
+  }
+  
+  .navigation-part-container{
+    align-self: center;
+  }
+  .navigation-part-container ul{
+    list-style: none;
+    display: flex;
+    gap: 1.5em;
+    font-size: large;
+   
+
+  }
+
+  .last-part-container{
+    align-self: center;
+  }
+  .last-part-container ul{
+    list-style: none;
+    display: flex;
+    gap: 1.5em;
+    font-size: large;
+  }
+
+  hr{
+    margin-left: -5rem;
+  }
+
+  .me-button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .me-button:hover {
+    background-color: #0056b3;
+  }
+
+  .business-button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .business-button:hover {
+    background-color: #0056b3;
+  }

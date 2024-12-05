@@ -1,0 +1,41 @@
+/* Menu container */
+.menu-container {
+    position: absolute;
+    top: 60px; /* Adjust to position below the triggering button (increase if needed) */
+    margin-left: -180px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Slightly more rounded corners for a modern look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 250px; /* Increased width for a larger menu */
+    max-height: 500px; /* Increase max height to make the menu taller */
+}
+
+/* Menu items */
+.menu-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display:block;
+}
+
+/* Individual menu item styles */
+.menu-container li {
+    padding: 15px 20px; /* Increased padding for a larger clickable area */
+    cursor: pointer;
+    font-size: 16px; /* Increased font size for better readability */
+    transition: background-color 0.2s ease; /* Smooth hover effect */
+}
+
+/* Hover effect */
+.menu-container li:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+    color: #333; /* Dark text color on hover */
+}
+
+/* Active or focus styles (Optional for accessibility) */
+.menu-container li:focus {
+    background-color: #e0e0e0; /* Slightly darker on focus */
+    outline: none; /* Remove default outline */
+}

@@ -1,0 +1,82 @@
+.container {
+    background: linear-gradient(to right, #4a90e2, #9013fe); /* Example gradient */
+    height: 100vh; 
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 0; /* Remove default margin */
+}
+
+.login {
+    max-width: 500px;
+    height: 50vh;
+    background-color: black; /* Background color for the login form */
+    color: aliceblue; /* Text color */
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+}
+
+.login-header {
+    font-size: 2.5rem;
+}
+
+.login-subheader {
+    font-size: 2rem;
+}
+
+.login-data {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    flex-direction: column; /* Stack inputs vertically */
+}
+
+input {
+    display: block;
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for input */
+    margin: 5px 0; /* Space between inputs */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+    color: black; /* Text color inside input */
+}
+
+input:focus {
+    border-color: #4a90e2; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+.login-dataformemail {
+    margin-top: 1rem;
+    padding: 15px 30px; /* Increased padding for a larger button */
+    background-color: #007BFF; /* Primary button color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Slightly increased border-radius for a softer look */
+    font-size: 1.2rem; /* Increased font size for better readability */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background and transform */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+}
+
+.login-dataformemail:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-3px); /* Increased lift effect on hover */
+}
+
+.login-dataformemail:active {
+    background-color: #004494; /* Even darker shade when active */
+    transform: translateY(0); /* Reset lift effect on click */
+}
+
+p{
+    margin-top: 10px;
+}
+.register-button{
+    color: red;
+}

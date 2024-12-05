@@ -1,0 +1,21 @@
+.notFound{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.notFound-text{
+    color: var(--text-color);
+    transform: translateY(40vh);
+    font-size: 3rem;
+    font-weight: 500;
+    border: 4px solid var(--border-color);
+    padding: 1rem;
+}
+
+.notFound-home{
+    color: var(--text-color);
+    transform: translateY(50vh);
+    align-items: center;
+}
