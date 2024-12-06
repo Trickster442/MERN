@@ -6,11 +6,11 @@ export default class PostController {
     // Method to add a new post
     async addNewPost(req, res) {
         try {
-            const { userId, description } = req.body;
+            const { description, userId } = req.body;
 
             // Validate request data
-            if (!userId || !description) {
-                return res.status(400).json({ error: "User ID and description are required." });
+            if (!description) {
+                return res.status(400).json({ error: "Post description is required." });
             }
 
             // Check if user exists
@@ -29,11 +29,10 @@ export default class PostController {
             // Respond with success
             res.status(201).json({
                 success: true,
-                message: "Post created successfully",
+                message: "Post created successfully.",
                 post: newPost,
             });
         } catch (error) {
-            // Handle unexpected errors
             res.status(500).json({
                 success: false,
                 error: "An error occurred while creating the post.",
@@ -45,17 +44,12 @@ export default class PostController {
     // Method to add a new comment
     async addNewComment(req, res) {
         try {
-            const { userId, postId, commentText } = req.body;
+            const { postId, commentText } = req.body;
+            const userId = req.userId; // Get userId from the token
 
             // Validate request data
-            if (!userId || !postId || !commentText) {
-                return res.status(400).json({ error: "User ID, post ID, and comment text are required." });
-            }
-
-            // Check if user exists
-            const user = await userModel.findById(userId);
-            if (!user) {
-                return res.status(404).json({ error: "User not found." });
+            if (!postId || !commentText) {
+                return res.status(400).json({ error: "Post ID and comment text are required." });
             }
 
             // Check if post exists
@@ -66,8 +60,11 @@ export default class PostController {
 
             // Create a new comment
             const newComment = await commentModel.create({ userId, postId, commentText });
+
+            // Update post's comment array
             post.comment.push(newComment._id);
-            await post.save(); // Save the user document with the updated post array
+            await post.save();
+
             // Respond with success
             res.status(201).json({
                 success: true,
@@ -75,7 +72,6 @@ export default class PostController {
                 comment: newComment,
             });
         } catch (error) {
-            // Handle unexpected errors
             res.status(500).json({
                 success: false,
                 error: "An error occurred while adding the comment.",
