@@ -1,0 +1,14 @@
+.post-container{
+    margin: auto;
+    width: 45%;
+    padding: 2%;
+}
+
+.secondary-container{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    height: 20vh;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

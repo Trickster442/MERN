@@ -41,6 +41,30 @@ export default class PostController {
         }
     }
 
+    
+    // Method to get all posts
+async getAllPost(req, res) {
+    try {
+        // Retrieve all posts from the database
+        const posts = await postModel.find({}, 'description createdAt'); // Only fetch the description and createdAt fields
+        
+        // Respond with the posts
+        res.status(200).json({
+            success: true,
+            message: "Posts retrieved successfully.",
+            posts,
+        });
+    } catch (error) {
+        console.error("Error retrieving posts:", error.message);
+        res.status(500).json({
+            success: false,
+            error: "An error occurred while retrieving posts.",
+            details: error.message,
+        });
+    }
+}
+
+    
     // Method to add a new comment
     async addNewComment(req, res) {
         try {

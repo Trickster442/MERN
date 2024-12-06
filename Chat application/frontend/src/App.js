@@ -5,6 +5,8 @@ import Registerr from './pages/Registerr';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import ProtectedRoute from './pages/ProtectedRoute';
+import PostFetch from './pages/PostFetch';
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,7 +20,7 @@ function App() {
         
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registerr />} />
-
+        <Route path='/allPost' element={<PostFetch/>}/>
         {/* Fallback for undefined routes */}
         <Route path="*" element={<NotFound/>} />
       </Routes>
