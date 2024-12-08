@@ -83,7 +83,55 @@ export default class FriendRequestController{
         }
     }
     
-
+    async getAllRequest(req, res) {
+        const { userId } = req.body;
+    
+        try {
+            // Find the user by ID
+            const user = await userModel.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+    
+            // Populate the 'friendRequests' field with 'fullname'
+            const populatedUser = await user.populate('friendRequest', 'fullname').execPopulate();
+    
+            // Return the populated friend requests
+            return res.status(200).json({
+                message: "Friend requests fetched successfully",
+                friendRequest: populatedUser.friendRequest,
+            });
+    
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "An error occurred", error });
+        }
+    }
+    
+    async getSentRequest(req,res){
+        const { userId } = req.body;
+    
+        try {
+            // Find the user by ID
+            const user = await userModel.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+    
+            // Populate the 'sentRequest' field with 'fullname'
+            const populatedUser = await user.populate('sentRequest', 'fullname').execPopulate();
+    
+            // Return the populated sent requests
+            return res.status(200).json({
+                message: "Sent requests fetched successfully",
+                sentRequest: populatedUser.sentRequest,
+            });
+    
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "An error occurred", error });
+        }
+    }
     // accepting the request
     async acceptFriendRequest(req,res){
 
