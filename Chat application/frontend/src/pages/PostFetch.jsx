@@ -15,13 +15,13 @@ const PostFetch = () => {
         };
 
         fetchPosts();
-    }, []); // Dependency array ensures the effect runs only once after component mounts
+    }, posts); // Dependency array ensures the effect runs only once after component mounts
 
     return (
         <div className='post-container'>
             {posts.length > 0 ? (
                 posts.map((post) => (
-                    <div className='secondary-container'>
+                    <div className='post-secondary-container'>
                     <div key={post._id}>
                         <h3>{post.description}</h3>
                     </div>

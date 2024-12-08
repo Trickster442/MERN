@@ -57,6 +57,10 @@ const AddPost = () => {
     return (
         <div className="addPost-container">
             <form onSubmit={addPost}>
+                <div className="addPost-secondary">
+                <p>
+                    UserName
+                </p>
                 <input
                     type="text"
                     name="postDescription"
@@ -66,6 +70,7 @@ const AddPost = () => {
                     placeholder="Write your post here..."
                     aria-label="Post description"
                 />
+                </div>
                 <div className="button-container">
                     <button type="submit">Post</button>
                     <button type="button" onClick={handleCancel}>

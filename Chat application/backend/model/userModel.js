@@ -41,6 +41,15 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User'  // It should be the model name ('User' should be capitalized if it's the same model name)
     }],
+    friendRequest: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User'  // It should be the model name ('User' should be capitalized if it's the same model name)
+    }],
+    sentRequest: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User'  // It should be the model name ('User' should be capitalized if it's the same model name)
+    }],
+
     following: [{
         type: mongoose.Types.ObjectId,
         ref: 'User'  // Same here, 'User' should match the model name

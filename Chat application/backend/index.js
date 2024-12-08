@@ -4,14 +4,16 @@ import mongoose from "mongoose";
 import cors from 'cors';
 import router from "./router/authRouter.js";
 import postRouter from "./router/postRouter.js";
+import friendRequestRouter from "./router/friendrequestRouter.js";
+
 
 const server = express();
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(cors());
 server.use('/api', router);
-server.use('/post', postRouter)
-
+server.use('/post', postRouter);
+server.use('/request', friendRequestRouter);
 
 // Ensure that .env variables are loaded
 if (!process.env.MONGO_URL || !process.env.PORT) {

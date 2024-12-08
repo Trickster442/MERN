@@ -1,9 +1,25 @@
 .addPost-container{
-    max-height: 50vh;
-    min-height: 20vh;
-    width: 400px;
+    max-height: 20vh;
+    min-height: 10vh;
+    width:600px;
     margin: auto;
-    z-index: 1000;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #fff;
+}
+.addPost-secondary{
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+}
+.addPost-container form{
+    padding: 10px;
+}
+
+.addPost-container form input{
+    border-radius: 50px;
+    background-color: rgb(243, 243, 243);
+    width: 70%; 
 }
 
 .addPost-container form button{

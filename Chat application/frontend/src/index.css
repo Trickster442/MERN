@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body{
+    background-color: #e1e1e1;
+}
+
 
 /* make primary and store it in var to use it later on */
 :root{
