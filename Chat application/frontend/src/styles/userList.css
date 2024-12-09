@@ -1,0 +1,76 @@
+.user-list-container {
+    margin: auto;
+    padding: 20px;
+    max-width: 800px;
+    text-align: center;
+    background-color: #f5f5f5; /* Subtle background for the container */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.user-list {
+    list-style-type: none;
+    padding: 5px; /* Remove padding for a cleaner look */
+    margin: 0; /* Remove margin for better alignment */
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    gap: 20px; /* Add spacing between items */
+    background-color: #fffefe;
+    border-radius: 10px;
+}
+
+.friendRequest-box {
+    border: 1px solid #ccc;
+    padding: 15px; /* Adjusted padding for better readability */
+    width: 250px; /* Consistent width for better alignment */
+    height: auto; /* Allow dynamic height */
+    border-radius: 8px;
+    display: flex; /* Flexbox for aligning content */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover effects */
+}
+
+.friendRequest-box:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Highlight on hover */
+}
+
+.user-item {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px; /* Add spacing between the name and button */
+    font-weight: bold;
+}
+
+.friendRequest-box button {
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: #007bff; /* Primary button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.friendRequest-box button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.loading, .error {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    margin: 20px 0;
+}
