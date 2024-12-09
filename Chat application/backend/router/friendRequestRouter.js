@@ -1,11 +1,11 @@
 import express from 'express';
-import FriendRequestController from '../controller/friendRequestController';
+import FriendRequestController from '../controller/friendRequestController.js';
 
 
 const friendRequestRouter = express.Router();
 const friendRequestController = new FriendRequestController();
 
-friendRequestRouter.post('/sendRequest', friendRequestController.sendFriendRequest)
-
+friendRequestRouter.post('/sendRequest', friendRequestController.sendFriendRequest);
+friendRequestRouter.post('/cancelRequest', friendRequestController.cancelFriendRequest);
 
 export default friendRequestRouter;

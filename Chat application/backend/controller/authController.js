@@ -67,20 +67,7 @@ export default class AuthController {
                 expiresIn: '1h' // Access token expires in 1 hour
             });
 
-            // Generate refresh token
-            // const refreshToken = jwt.sign({ userId: user._id }, process.env.REFRESH_TOKEN_SECRET, {
-            //     expiresIn: '7d' // Refresh token expires in 7 days
-            // });
-
-            // Set refresh token in an HTTP-only cookie
-            // res.cookie('refreshtoken', refreshToken, {
-            //     httpOnly: true,
-            //     secure: process.env.NODE_ENV === 'production', // Secure flag in production
-            //     path: "/api/refresh_token",
-            //     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-            // });
-
-            // Prepare the user response
+            
             const userResponse = {
                 username: user.username,
                 fullname: user.fullname,
@@ -97,51 +84,40 @@ export default class AuthController {
         }
     }
 
-    // Logout method
-    // async logout(req, res) {
-    //     try {
-    //         res.clearCookie('refreshtoken', { path: '/api/refresh_token' });
-    //         res.json({ message: "Logout successfully" });
-    //     } catch (err) {
-    //         res.status(400).json({ success: false, message: err.message });
-    //     }
-    // }
+    async userList(req,res){
+        try{
+            const users = await userModel.find({}, 'fullname _id')
+            if(users){
+                res.status(200).json({
+                    sucess:true,
+                    users
+                })
+            }
+            else{
+                res.send({success:false, message:"Cannot find users"});
+            }
+        } catch(e){
+            console.log(e);
+        }
+    }
 
-    // Generate new access token using refresh token
-    // async generateAccessToken(req, res) {
-    //     try {
-    //         const rf_token = req.cookies.refreshtoken;
-
-    //         if (!rf_token) {
-    //             return res.status(401).json({ message: "Refresh token not provided" });
-    //         }
-
-    //         // Verify the refresh token
-    //         jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
-    //             if (err) {
-    //                 return res.status(403).json({ message: "Invalid or expired refresh token" });
-    //             }
-
-    //             // Fetch user information from the database using the decoded user ID
-    //             const user = await userModel.findById(decoded.userId).select("-password")
-    //                 .populate("friends following");
-
-    //             if (!user) {
-    //                 return res.status(404).json({ message: "User does not exist" });
-    //             }
-
-    //             // Generate new access token
-    //             const accessToken = jwt.sign({ userId: decoded.userId }, process.env.ACCESS_TOKEN_SECRET, {
-    //                 expiresIn: '1h' // Access token expires in 1 hour
-    //             });
-
-    //             // Return the new access token and user info
-    //             res.json({ accessToken, user });
-    //         });
-
-    //     } catch (err) {
-    //         console.error(err);
-    //         res.status(400).json({ success: false, message: err.message });
-    //     }
-    // }
+    async findUser(req, res) {
+        const { userId } = req.body;
+    
+        try {
+            // Find the user by ID and select specific fields
+            const user = await userModel.findById(userId, 'username fullname');
+            
+            if (user) {
+                return res.status(200).json({ success: true, user });
+            } else {
+                return res.status(404).json({ success: false, message: "User not found" });
+            }
+        } catch (error) {
+            // Log the error and return an error response
+            console.error("Error finding user:", error);
+            return res.status(500).json({ success: false, message: "Internal server error" });
+        }
+    }
+    
 }

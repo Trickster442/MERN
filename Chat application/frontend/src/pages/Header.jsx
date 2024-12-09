@@ -46,7 +46,7 @@ const closeMenu = ()=>{
             <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="#network">My Network</a>
+            <a href="/network">My Network</a>
           </li>
           <li>
             <a href="#jobs">Jobs</a>

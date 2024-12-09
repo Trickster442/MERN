@@ -16,4 +16,6 @@ router.post('/login', authController.login);
 // // Refresh token route (if you have this feature implemented)
 // router.get('/refresh_token', authController.generateAccessToken);
 
+router.get('/users', authController.userList);
+router.post('/findUser', authController.findUser);
 export default router;
