@@ -27,6 +27,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Login failed:', error);
+      alert("Login Failed!!");
       // Optional: Handle error display (e.g., show a toast or error message)
     }
   };

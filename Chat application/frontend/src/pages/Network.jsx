@@ -6,7 +6,7 @@ const Network = () => {
     <div>
         <Header/>
         <br></br>
-      <UserList/>
+        <UserList/>
     </div>
   )
 }

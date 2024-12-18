@@ -83,7 +83,8 @@ export default class FriendRequestController{
         }
     }
     
-    async getAllRequest(req, res) {
+    //to get all the recieve request
+    async getAllRecieveRequest(req, res) {
         const { userId } = req.body;
     
         try {
@@ -108,23 +109,56 @@ export default class FriendRequestController{
         }
     }
     
-    async getSentRequest(req,res){
+    //to check all request sent by particular user
+    async getAllSentRequest(req, res) {
+    const { userId } = req.body;
+
+    try {
+        // Find the user and populate the 'sentRequest' field with 'fullname'
+        const user = await userModel
+            .findById(userId)
+            .populate('sentRequest', 'fullname'); // Populates only the fullname field of sentRequest
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Extract the populated sent requests
+        const sentRequests = user.sentRequest.map(request => ({
+            _id: request._id,
+            fullname: request.fullname,
+        }));
+
+        // Return the populated sent requests
+        return res.status(200).json({
+            message: "Sent requests fetched successfully",
+            sentRequests, // Return the list of sent requests
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "An error occurred", error });
+    }
+}
+
+
+    async getSentRequest(req, res) {
         const { userId } = req.body;
     
         try {
-            // Find the user by ID
-            const user = await userModel.findById(userId);
+            // Find the user and populate the 'sentRequest' field with 'fullname'
+            const user = await userModel
+                .findById(userId)
+                .populate('sentRequest', 'fullname');
+    
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
     
-            // Populate the 'sentRequest' field with 'fullname'
-            const populatedUser = await user.populate('sentRequest', 'fullname').execPopulate();
-    
             // Return the populated sent requests
             return res.status(200).json({
                 message: "Sent requests fetched successfully",
-                sentRequest: populatedUser.sentRequest,
+                sentRequest: user.fullname,
             });
     
         } catch (error) {
@@ -132,6 +166,7 @@ export default class FriendRequestController{
             return res.status(500).json({ message: "An error occurred", error });
         }
     }
+    
     // accepting the request
     async acceptFriendRequest(req,res){
 
