@@ -215,7 +215,45 @@ export default class FriendRequestController{
 
     // deleting the request
     async deleteFriendRequest(req,res){
-
+        try {
+            const { toUserId, fromUserId } = req.body;
+    
+            // Find the user who received the request
+            const toUser = await userModel.findById(toUserId);
+            if (!toUser) {
+                return res.status(404).json({ message: "Receiver user not found" });
+            }
+    
+            // Check if the request exists in the receiver's friendRequest list
+            const friendRequestIndex = toUser.friendRequest.indexOf(fromUserId);
+            if (friendRequestIndex === -1) {
+                return res.status(400).json({ message: "No friend request from this user" });
+            }
+    
+            // Find the user who sent the request
+            const fromUser = await userModel.findById(fromUserId);
+            if (!fromUser) {
+                return res.status(404).json({ message: "Sender user not found" });
+            }
+    
+            // Remove from friendRequest list of the receiver
+            toUser.friendRequest.splice(friendRequestIndex, 1);
+    
+            // Remove from sentRequest list of the sender
+            const sentRequestIndex = fromUser.sentRequest.indexOf(toUserId);
+            if (sentRequestIndex !== -1) {
+                fromUser.sentRequest.splice(sentRequestIndex, 1);
+            }
+    
+            // Save the updated users
+            await toUser.save();
+            await fromUser.save();
+    
+            return res.status(200).json({ message: "Friend request deleted successfully" });
+        } catch (error) {
+            console.error("Error deleting friend request:", error);
+            return res.status(500).json({ message: "An error occurred", error });
+        }
     }
 
 
