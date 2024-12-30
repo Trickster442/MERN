@@ -88,26 +88,24 @@ export default class FriendRequestController{
         const { userId } = req.body;
     
         try {
-            // Find the user by ID
-            const user = await userModel.findById(userId);
+            // Find the user by ID and populate the 'friendRequest' field with 'fullname'
+            const user = await userModel.findById(userId).populate('friendRequest', 'fullname -_id');
+    
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
     
-            // Populate the 'friendRequests' field with 'fullname'
-            const populatedUser = await user.populate('friendRequest', 'fullname').execPopulate();
-    
             // Return the populated friend requests
             return res.status(200).json({
                 message: "Friend requests fetched successfully",
-                friendRequest: populatedUser.friendRequest,
+                friendRequest: user.friendRequest,
             });
-    
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: "An error occurred", error });
         }
     }
+    
     
     //to check all request sent by particular user
     async getAllSentRequest(req, res) {
@@ -168,9 +166,52 @@ export default class FriendRequestController{
     }
     
     // accepting the request
-    async acceptFriendRequest(req,res){
-
+    async acceptFriendRequest(req, res) {
+        try {
+            const { toUserId, fromUserId } = req.body;
+    
+            // Find the user who received the request
+            const toUser = await userModel.findById(toUserId);
+            if (!toUser) {
+                return res.status(404).json({ message: "Receiver user not found" });
+            }
+    
+            // Check if the request exists in the receiver's friendRequest list
+            const friendRequestIndex = toUser.friendRequest.indexOf(fromUserId);
+            if (friendRequestIndex === -1) {
+                return res.status(400).json({ message: "No friend request from this user" });
+            }
+    
+            // Find the user who sent the request
+            const fromUser = await userModel.findById(fromUserId);
+            if (!fromUser) {
+                return res.status(404).json({ message: "Sender user not found" });
+            }
+    
+            // Remove from friendRequest list of the receiver
+            toUser.friendRequest.splice(friendRequestIndex, 1);
+    
+            // Remove from sentRequest list of the sender
+            const sentRequestIndex = fromUser.sentRequest.indexOf(toUserId);
+            if (sentRequestIndex !== -1) {
+                fromUser.sentRequest.splice(sentRequestIndex, 1);
+            }
+    
+            // Add each other as friends
+            toUser.friends.push(fromUserId);
+            fromUser.friends.push(toUserId);
+    
+            // Save the updated users
+            await toUser.save();
+            await fromUser.save();
+    
+            return res.status(200).json({ message: "Friend request accepted successfully" });
+        } catch (error) {
+            console.error("Error accepting friend request:", error);
+            return res.status(500).json({ message: "An error occurred", error });
+        }
     }
+    
 
     // deleting the request
     async deleteFriendRequest(req,res){

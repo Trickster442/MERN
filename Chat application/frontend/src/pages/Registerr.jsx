@@ -49,8 +49,8 @@ const Registerr = () => {
         <form onSubmit={registerHandle}>
           <input 
             type='text' 
-            value={username}
-            onChange={handleChangeToUpperCase(setUsername)} 
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)}
             placeholder='Your username' 
             required
           />

@@ -9,5 +9,7 @@ friendRequestRouter.post('/sendRequest', friendRequestController.sendFriendReque
 friendRequestRouter.post('/allSentRequest', friendRequestController.getAllSentRequest);
 friendRequestRouter.post('/getSentRequest', friendRequestController.getSentRequest);
 friendRequestRouter.post('/cancelRequest', friendRequestController.cancelFriendRequest);
+friendRequestRouter.post('/allReceiveRequest', friendRequestController.getAllRecieveRequest);
+friendRequestRouter.post('/acceptFriendRequest', friendRequestController.acceptFriendRequest);
 
 export default friendRequestRouter;
