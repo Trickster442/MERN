@@ -5,7 +5,6 @@ import { jwtDecode } from "jwt-decode";
 
 const AddPost = () => {
     const [post, setPost] = useState(""); // State to hold the post description
-
     const addPost = async (e) => {
         e.preventDefault();
 

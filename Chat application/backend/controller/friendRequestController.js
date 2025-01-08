@@ -89,7 +89,7 @@ export default class FriendRequestController{
     
         try {
             // Find the user by ID and populate the 'friendRequest' field with 'fullname'
-            const user = await userModel.findById(userId).populate('friendRequest', 'fullname -_id');
+            const user = await userModel.findById(userId).populate('friendRequest', 'fullname');
     
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
@@ -255,6 +255,31 @@ export default class FriendRequestController{
             return res.status(500).json({ message: "An error occurred", error });
         }
     }
+
+    //list of all friends
+    async friendList(req, res) {
+        try {
+            const { userId } = req.body;
+    
+            if (!userId) {
+                return res.status(400).json({ status: false, message: "User ID is required" });
+            }
+    
+            const findFriend = await userModel.findById(userId).populate("friends");
+    
+            if (!findFriend) {
+                return res.status(404).json({ status: false, message: "No friends found for the given user ID" });
+            }
+    
+            // Extract friend IDs into a list
+            const list = findFriend.friends.map(friend => friend._id);
+            return res.json({ status: true, list });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ status: false, message: "Server error" });
+        }
+    }
+    
 
 
 }

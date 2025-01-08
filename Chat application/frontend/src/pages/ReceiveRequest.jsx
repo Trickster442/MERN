@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode'; // Correct import
 import api from '../axios/configuration.js';
 import '../styles/receiveRequest.css'; // Retained external CSS import for additional customization
-
+import Header from './Header.jsx';
 const ReceiveRequest = () => {
     const [receiveRequest, setReceiveRequest] = useState([]);
 
@@ -13,7 +13,6 @@ const ReceiveRequest = () => {
                 if (token) {
                     const decoded = jwtDecode(token);
                     const userId = decoded.userId;
-                    console.log(userId);
                     const response = await api.post('/request/allReceiveRequest', { userId });
                     const friendRequests = response.data.friendRequest;
 
@@ -33,7 +32,42 @@ const ReceiveRequest = () => {
         fetchReceiveRequest(); // Call the function
     }, []); // Dependency array is empty to run only once on component mount
 
+    const acceptRequest = async(reqId)=>{
+        try{
+            const token = localStorage.getItem('token');
+            if(token){
+                const decoded = jwtDecode(token);
+                const userId = decoded.userId;
+                await api.post('/request/acceptFriendRequest', {toUserId:userId,fromUserId:reqId})
+
+                setReceiveRequest((prevRequests) =>
+                    prevRequests.filter((request) => request._id !== reqId)
+                );
+            } 
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+    const deleteRequest = async(reqId)=>{
+        try{
+            const token = localStorage.getItem('token');
+            if(token){
+                const decoded = jwtDecode(token);
+                const userId = decoded.userId;
+                await api.post('/request/deleteFriendRequest', {toUserId:userId,fromUserId:reqId})
+
+                setReceiveRequest((prevRequests) =>
+                    prevRequests.filter((request) => request._id !== reqId)
+                );
+            } 
+        }catch(err){
+            console.log(err);
+        }
+    }
     return (
+        <>
+        <Header/>
         <div className="receive-request-container">
             <h2>Connection Requests</h2>
             {/* Render the received requests */}
@@ -49,8 +83,8 @@ const ReceiveRequest = () => {
                                     </div>
                                     <div>
                                         <p className="request-name">{request.fullname}</p>
-                                        <button className="accept-btn">Accept</button>
-                                        <button className="decline-btn">Decline</button>
+                                        <button className="accept-btn" onClick={()=>acceptRequest(request._id)}>Accept</button>
+                                        <button className="decline-btn" onClick={()=>deleteRequest(request._id)}>Decline</button>
                                     </div>
                                 </div>
                             </li>
@@ -61,6 +95,7 @@ const ReceiveRequest = () => {
                 <p>No friend requests.</p>
             )}
         </div>
+        </>
     );
 };
 

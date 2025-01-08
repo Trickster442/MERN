@@ -11,5 +11,7 @@ friendRequestRouter.post('/getSentRequest', friendRequestController.getSentReque
 friendRequestRouter.post('/cancelRequest', friendRequestController.cancelFriendRequest);
 friendRequestRouter.post('/allReceiveRequest', friendRequestController.getAllRecieveRequest);
 friendRequestRouter.post('/acceptFriendRequest', friendRequestController.acceptFriendRequest);
+friendRequestRouter.post('/deleteFriendRequest', friendRequestController.deleteFriendRequest);
+friendRequestRouter.post('/friends', friendRequestController.friendList);
 
 export default friendRequestRouter;

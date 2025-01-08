@@ -8,6 +8,7 @@ import ProtectedRoute from './pages/ProtectedRoute';
 import PostFetch from './pages/PostFetch';
 import Network from './pages/Network';
 import ReceiveRequest from './pages/ReceiveRequest';
+import Message from './pages/Message';
 function App() {
   return (
     <BrowserRouter>
@@ -21,13 +22,28 @@ function App() {
         
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registerr />} />
-        <Route path='/allPost' element={<PostFetch/>}/>
-        <Route path="/receiveRequest" element={<ReceiveRequest />} />
+        <Route path='/allPost' element={
+          <ProtectedRoute>
+            <PostFetch/>
+            </ProtectedRoute>
+          }/>
+        <Route path="/friendRequest" element={
+          <ProtectedRoute>
+          <ReceiveRequest/>
+          </ProtectedRoute>
+          } />
         <Route path='/network' element={
           <ProtectedRoute>
           <Network/>
           </ProtectedRoute>}
           />
+
+        <Route path='/messaging' element={
+          <ProtectedRoute>
+          <Message/>
+          </ProtectedRoute>}
+        />
+
         {/* Fallback for undefined routes */}
         <Route path="*" element={<NotFound/>} />
       </Routes>

@@ -49,7 +49,7 @@ const closeMenu = ()=>{
             <a href="/network">My Network</a>
           </li>
           <li>
-            <a href="#jobs">Jobs</a>
+            <Link to="/friendRequest">Requests</Link>
           </li>
           <li>
             <a href="#messaging">Messaging</a>
